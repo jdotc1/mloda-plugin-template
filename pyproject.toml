@@ -10,8 +10,8 @@ version = "0.5.0"
 description = "TEMPLATE PLACEHOLDER - Do not install directly. This package reserves the name for mloda-plugin-template. See https://github.com/mloda-ai/mloda-plugin-template"
 license = "Apache-2.0"
 authors = [{ name = "Your Name placeholder", email = "placeholder@placeholder.com" }]
-# mloda capped below 0.15.0 until the next upgrade is evaluated.
-dependencies = ["mloda>=0.14.0,<0.15.0", "mloda-testing>=0.8.0"]
+# mloda capped below 0.17.0 until the next upgrade is evaluated.
+dependencies = ["mloda>=0.16.0,<0.17.0", "mloda-testing>=0.10.0"]
 requires-python = ">=3.10"
 # keywords = ["mloda", "mloda-plugin"]  # off for the name reservation; uncomment for your plugin (customize.sh does this)
 # No `License ::` classifier: setuptools rejects it next to the SPDX `license` string.
@@ -38,7 +38,7 @@ placeholder = "placeholder.extenders.manifest:EXTENDERS"
 dev = [
     "tox",
     "tox-uv",
-    "uv>=0.11.6",
+    "uv>=0.13.4",
     "pytest",
     "ruff",
     "mypy",
@@ -71,4 +71,6 @@ exclude_dirs = [".tox", ".venv", "tests"]
 
 [tool.uv]
 exclude-newer = "7 days"
-exclude-newer-package = { mloda = "2026-12-31", "mloda-testing" = "2026-12-31", "mloda-registry" = "2026-12-31" }
+# uv is let through early for the 0.13.4 CA store security fix (released 2026-10-20).
+# Drop the uv entry on or after 2026-10-28, once that release has cleared the 7-day window.
+exclude-newer-package = { mloda = "2026-12-31", "mloda-testing" = "2026-12-31", "mloda-registry" = "2026-12-31", uv = "2026-10-21" }
